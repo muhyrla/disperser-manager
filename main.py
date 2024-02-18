@@ -27,7 +27,7 @@ def main():
     mode = int(input("Введите режим работы (1 или 2): "))
 
     if mode == 1:
-        num_keys = int(input("Введите количество ключей: "))
+        num_keys = int(input("Введите нужное кол-во приваток: "))
 
         with ThreadPoolExecutor(max_workers=5) as executor:
             for i in range(num_keys):
@@ -35,20 +35,19 @@ def main():
                 save_keys_to_file(key.result(), i)
 
         print(f"{num_keys} приватных ключей было сгенерировано и сохранено в файл 'private_keys.txt'.")
-
     elif mode == 2:
         filename = input("Введите название файла: ")
-        number = input("Введите число: ")
+        number = input("Введите число to disperse: ")
 
         with open(filename, 'r') as file:
             keys = [line.strip() for line in file]
 
         save_keys_and_number_to_file(keys, number)
 
-        print(f"Приватные ключи и число были сохранены в файл {filename}.")
-
+        print(f"Файл для disperse был сохранен в файл {filename}.")
     else:
         print("Неверный режим работы. Введите 1 или 2.")
-
+    
+    return main()
 
 main()
